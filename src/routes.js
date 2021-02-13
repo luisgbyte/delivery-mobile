@@ -13,8 +13,8 @@ export default function Routes() {
             screenOptions={{
                 headerShown: false,
             }}>
-            <Stack.Screen name="Entrar" component={SignIn} />
-            <Stack.Screen name="Cadastrar" component={SignUp} />
+            <Stack.Screen name="SignIn" component={SignIn} />
+            <Stack.Screen name="SignUp" component={SignUp} />
         </Stack.Navigator>
     );
 }

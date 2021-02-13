@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 
 import Logo from '~/components/Logo';
 
@@ -13,33 +13,44 @@ import {
     SignLinkText,
 } from './styles';
 
-const SignIn = () => (
-    <Background>
-        <Container>
-            <Logo height="150px" width="150px" />
-            <Form>
-                <FormInput
-                    icon="mail-outline"
-                    keyboardType="email-address"
-                    autoCorrect={false}
-                    autoCapitalize="none"
-                    placeholder="Digite seu e-mail"
-                />
+const SignIn = ({navigation}) => {
+    const passwordRef = useRef();
 
-                <FormInput
-                    icon="lock-outline"
-                    secureTextEntry
-                    placeholder="Sua senha secreta"
-                />
+    const handleSubmit = () => {};
 
-                <SubmitButton onPress={() => {}}>Acessar</SubmitButton>
-            </Form>
+    return (
+        <Background>
+            <Container>
+                <Logo height="150px" width="150px" />
+                <Form>
+                    <FormInput
+                        icon="mail-outline"
+                        keyboardType="email-address"
+                        autoCorrect={false}
+                        autoCapitalize="none"
+                        placeholder="Digite seu e-mail"
+                        returnKeyType="next"
+                        onSubmitEditing={() => passwordRef.current.focus()}
+                    />
 
-            <SignLink onPress={() => {}}>
-                <SignLinkText>Criar conta gratuita</SignLinkText>
-            </SignLink>
-        </Container>
-    </Background>
-);
+                    <FormInput
+                        icon="lock-outline"
+                        secureTextEntry
+                        placeholder="Sua senha secreta"
+                        ref={passwordRef}
+                        returnKeyType="send"
+                        onSubmitEditing={handleSubmit}
+                    />
+
+                    <SubmitButton onPress={handleSubmit}>Acessar</SubmitButton>
+                </Form>
+
+                <SignLink onPress={() => navigation.navigate('SignUp')}>
+                    <SignLinkText>Criar conta gratuita</SignLinkText>
+                </SignLink>
+            </Container>
+        </Background>
+    );
+};
 
 export default SignIn;
