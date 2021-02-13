@@ -1,5 +1,7 @@
 import 'react-native-gesture-handler';
 import React from 'react';
+import './config/ReactotronConfig';
+
 import {NavigationContainer} from '@react-navigation/native';
 
 import {StatusBar} from 'react-native';
