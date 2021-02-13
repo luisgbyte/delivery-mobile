@@ -26,5 +26,24 @@ module.exports = {
             },
         ],
         'import/prefer-default-export': 'off',
+        'no-unused-vars': ['error', {argsIgnorePattern: '^_'}],
+        'react/jsx-one-expression-per-line': 'off',
+        'global-required': 'off',
+        'react-native/no-raw-text': 'off',
+        'no-underscore-dangle': 'off',
+        camelcase: 'off',
+        'no-console': ['error', {allow: ['tron']}],
+        'react/state-in-constructor': 'off',
+        'react/static-property-placement': 'off',
+        'react/jsx-props-no-spreading': 'off',
+        'react/prop-types': 'off',
+        'no-param-reassign': 'off',
+    },
+    settings: {
+        'import/resolver': {
+            'babel-plugin-root-import': {
+                rootPathSuffix: 'src',
+            },
+        },
     },
 };
