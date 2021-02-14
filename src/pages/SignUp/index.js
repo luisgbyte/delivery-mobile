@@ -1,8 +1,10 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 
+import {useDispatch, useSelector} from 'react-redux';
 import Logo from '~/components/Logo';
 
 import Background from '~/components/Background';
+import {signUpRequest} from '~/store/modules/auth/actions';
 
 import {
     Container,
@@ -14,10 +16,20 @@ import {
 } from './styles';
 
 const SignUp = ({navigation}) => {
+    const dispatch = useDispatch();
+
     const emailRef = useRef();
     const passwordRef = useRef();
 
-    const handleSubmit = () => {};
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const {loading} = useSelector((state) => state.auth);
+
+    const handleSubmit = () => {
+        dispatch(signUpRequest(name, email, password));
+    };
 
     return (
         <Background>
@@ -32,6 +44,8 @@ const SignUp = ({navigation}) => {
                         placeholder="Nome completo"
                         returnKeyType="next"
                         onSubmitEditing={() => emailRef.current.focus()}
+                        value={name}
+                        onChangeText={setName}
                     />
 
                     <FormInput
@@ -43,6 +57,8 @@ const SignUp = ({navigation}) => {
                         ref={emailRef}
                         returnKeyType="next"
                         onSubmitEditing={() => passwordRef.current.focus()}
+                        value={email}
+                        onChangeText={setEmail}
                     />
 
                     <FormInput
@@ -52,9 +68,13 @@ const SignUp = ({navigation}) => {
                         ref={passwordRef}
                         returnKeyType="send"
                         onSubmitEditing={handleSubmit}
+                        value={password}
+                        onChangeText={setPassword}
                     />
 
-                    <SubmitButton onPress={handleSubmit}>Acessar</SubmitButton>
+                    <SubmitButton loading={loading} onPress={handleSubmit}>
+                        Cadastrar
+                    </SubmitButton>
                 </Form>
 
                 <SignLink onPress={() => navigation.navigate('SignIn')}>

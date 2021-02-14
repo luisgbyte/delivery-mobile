@@ -1,8 +1,10 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 
 import Logo from '~/components/Logo';
 
 import Background from '~/components/Background';
+import {signInRequest} from '~/store/modules/auth/actions';
 
 import {
     Container,
@@ -14,9 +16,18 @@ import {
 } from './styles';
 
 const SignIn = ({navigation}) => {
+    const dispath = useDispatch();
     const passwordRef = useRef();
 
-    const handleSubmit = () => {};
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const {loading} = useSelector((state) => state.auth);
+
+    function handleSubmit() {
+        console.tron.log('test5');
+        dispath(signInRequest(email, password));
+    }
 
     return (
         <Background>
@@ -31,6 +42,8 @@ const SignIn = ({navigation}) => {
                         placeholder="Digite seu e-mail"
                         returnKeyType="next"
                         onSubmitEditing={() => passwordRef.current.focus()}
+                        value={email}
+                        onChangeText={setEmail}
                     />
 
                     <FormInput
@@ -40,9 +53,13 @@ const SignIn = ({navigation}) => {
                         ref={passwordRef}
                         returnKeyType="send"
                         onSubmitEditing={handleSubmit}
+                        value={password}
+                        onChangeText={setPassword}
                     />
 
-                    <SubmitButton onPress={handleSubmit}>Acessar</SubmitButton>
+                    <SubmitButton loading={loading} onPress={handleSubmit}>
+                        Acessar
+                    </SubmitButton>
                 </Form>
 
                 <SignLink onPress={() => navigation.navigate('SignUp')}>
