@@ -3,6 +3,6 @@ import {Text} from 'react-native';
 
 // import { Container } from './styles';
 
-const Listing = () => <Text>Listing</Text>;
+const Order = () => <Text>Order</Text>;
 
-export default Listing;
+export default Order;
