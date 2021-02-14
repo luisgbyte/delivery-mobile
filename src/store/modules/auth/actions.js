@@ -19,6 +19,12 @@ export function signInSuccess(token, user) {
     };
 }
 
+export function signUpSuccess() {
+    return {
+        type: '@auth/SIGN_UP_SUCCESS',
+    };
+}
+
 export function signFailure() {
     return {
         type: '@auth/SIGN_FAILURE',
