@@ -46,6 +46,8 @@ export default function Routes() {
                         inactiveTintColor: 'rgba(255, 255, 255, 0.6)',
                         style: {
                             backgroundColor: '#c72820',
+                            borderTopWidth: 0,
+                            borderTopColor: 'transparent',
                         },
                     }}>
                     <Tab.Screen name="Listagem" component={Listing} />
