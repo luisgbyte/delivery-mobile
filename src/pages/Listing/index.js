@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {Image, Text, ScrollView} from 'react-native';
+import {Image, Text, ScrollView, Alert} from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-// import Logo from '~/components/Logo';
-
+import {useDispatch} from 'react-redux';
 import SearchInput from '~/components/SearchInput';
 
 import api from '~/services/api';
 import formatValue from '~/utils/formatValue';
+
+import {signOut} from '~/store/modules/auth/actions';
 
 import {
     Container,
@@ -26,15 +27,29 @@ import {
 } from './styles';
 
 const Listing = ({navigation}) => {
+    const dispatch = useDispatch();
+
     const [products, setProducts] = useState(null);
+
+    async function handleNavigate(id) {
+        // Navigate do ProductDetails page
+        navigation.navigate('ProductDetails');
+        return id;
+    }
+
+    function handleLogout() {
+        dispatch(signOut());
+    }
 
     useEffect(() => {
         async function loadFoods() {
-            const response = await api.get('products');
-
-            setProducts(response.data.rows);
+            try {
+                const response = await api.get('products');
+                setProducts(response.data.rows);
+            } catch (err) {
+                Alert.alert('Ops! Temos um problema.', `${err}`);
+            }
         }
-
         loadFoods();
     }, []);
 
@@ -48,9 +63,9 @@ const Listing = ({navigation}) => {
                 </Text>
                 <Icon
                     name="logout"
-                    size={24}
+                    size={26}
                     color="#FFB84D"
-                    onPress={() => navigation.navigate('Home')}
+                    onPress={handleLogout}
                 />
             </Header>
             <FilterContainer>
@@ -68,7 +83,7 @@ const Listing = ({navigation}) => {
                             products.map((product) => (
                                 <Food
                                     key={product.id}
-                                    onPress={() => {}}
+                                    onPress={() => handleNavigate()}
                                     activeOpacity={0.6}
                                     testID="null">
                                     <FoodImageContainer>
