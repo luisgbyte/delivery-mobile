@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Image, Text, ScrollView} from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -27,13 +27,23 @@ import {
 } from './styles';
 
 const Listing = ({navigation}) => {
-    const dispatch = useDispatch();
+    const [searchValue, setSearchValue] = useState('');
 
-    const {products} = useSelector((state) => state.product);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(productRequest());
     }, []);
+
+    const filterProducts = ({product}) => {
+        const {products} = product;
+
+        if (searchValue !== '')
+            return products.filter((item) => item.name.includes(searchValue));
+        return products;
+    };
+
+    const products = useSelector(filterProducts);
 
     async function handleNavigate(id) {
         // Navigate do ProductDetails page
@@ -63,8 +73,8 @@ const Listing = ({navigation}) => {
             </Header>
             <FilterContainer>
                 <SearchInput
-                    value={null}
-                    onChangeText={null}
+                    value={searchValue}
+                    onChangeText={setSearchValue}
                     placeholder="Hey, o que você está procurando?"
                 />
             </FilterContainer>

@@ -1,12 +1,11 @@
 import React from 'react';
-import {Text} from 'react-native';
-// import { Container } from './styles';
-import Background from '~/components/Background';
+
+import {Container, Header} from './styles';
 
 const Order = () => (
-    <Background>
-        <Text>Pedidos</Text>
-    </Background>
+    <Container>
+        <Header />
+    </Container>
 );
 
 export default Order;

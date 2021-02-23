@@ -43,7 +43,7 @@ export default function Routes() {
                             headerLeftContainerStyle: {
                                 marginLeft: 24,
                             },
-                            headerTitle: 'Prato - Massas',
+                            headerTitle: 'Detalhes',
                             headerTitleStyle: {
                                 color: '#fff',
                                 fontFamily: 'Poppins-Regular',

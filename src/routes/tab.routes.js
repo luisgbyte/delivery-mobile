@@ -18,8 +18,8 @@ const TabRoutes = () => (
 
                 if (route.name === 'Listagem') {
                     iconName = 'menu';
-                } else if (route.name === 'Pedidos') {
-                    iconName = 'shopping-basket';
+                } else if (route.name === 'Carrinho') {
+                    iconName = 'shopping-cart';
                 } else if (route.name === 'Perfil') {
                     iconName = 'person';
                 }
@@ -39,7 +39,7 @@ const TabRoutes = () => (
             },
         }}>
         <Tab.Screen name="Listagem" component={Listing} />
-        <Tab.Screen name="Pedidos" component={Order} />
+        <Tab.Screen name="Carrinho" component={Order} />
         <Tab.Screen name="Perfil" component={Profile} />
     </Tab.Navigator>
 );

@@ -52,7 +52,7 @@ const ProductDetails = () => {
 
     function handleDecrementFood() {
         // Decrement food quantity
-        if (foodQuantity === 0) return;
+        if (foodQuantity === 1) return;
         setFoodQuantity(foodQuantity - 1);
     }
 
