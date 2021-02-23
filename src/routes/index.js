@@ -35,20 +35,19 @@ export default function Routes() {
                             headerLeft: () => (
                                 <Icon
                                     name="navigate-before"
-                                    size={40}
+                                    size={35}
                                     color="#FFB84D"
                                     onPress={() => navigation.goBack()}
                                 />
                             ),
                             headerLeftContainerStyle: {
-                                marginLeft: 20,
+                                marginLeft: 24,
                             },
                             headerTitle: 'Prato - Massas',
                             headerTitleStyle: {
                                 color: '#fff',
                                 fontFamily: 'Poppins-Regular',
                                 fontSize: 16,
-                                fontWeight: 'bold',
                             },
                             headerStyle: {
                                 backgroundColor: '#C72828',

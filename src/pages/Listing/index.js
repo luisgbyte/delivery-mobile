@@ -1,15 +1,15 @@
-import React, {useEffect, useState} from 'react';
-import {Image, Text, ScrollView, Alert} from 'react-native';
+import React, {useEffect} from 'react';
+import {Image, Text, ScrollView} from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import SearchInput from '~/components/SearchInput';
 
-import api from '~/services/api';
 import formatValue from '~/utils/formatValue';
 
 import {signOut} from '~/store/modules/auth/actions';
+import {productRequest} from '~/store/modules/product/actions';
 
 import {
     Container,
@@ -29,29 +29,22 @@ import {
 const Listing = ({navigation}) => {
     const dispatch = useDispatch();
 
-    const [products, setProducts] = useState(null);
+    const {products} = useSelector((state) => state.product);
+
+    useEffect(() => {
+        dispatch(productRequest());
+    }, []);
 
     async function handleNavigate(id) {
         // Navigate do ProductDetails page
-        navigation.navigate('ProductDetails');
-        return id;
+        navigation.navigate('ProductDetails', {
+            id,
+        });
     }
 
     function handleLogout() {
         dispatch(signOut());
     }
-
-    useEffect(() => {
-        async function loadFoods() {
-            try {
-                const response = await api.get('products');
-                setProducts(response.data.rows);
-            } catch (err) {
-                Alert.alert('Ops! Temos um problema.', `${err}`);
-            }
-        }
-        loadFoods();
-    }, []);
 
     return (
         <Container>
@@ -83,7 +76,7 @@ const Listing = ({navigation}) => {
                             products.map((product) => (
                                 <Food
                                     key={product.id}
-                                    onPress={() => handleNavigate()}
+                                    onPress={() => handleNavigate(product.id)}
                                     activeOpacity={0.6}
                                     testID="null">
                                     <FoodImageContainer>
