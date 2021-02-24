@@ -50,6 +50,9 @@ const Listing = ({navigation}) => {
         navigation.navigate('ProductDetails', {
             id,
         });
+
+        // Clearing the search field
+        setSearchValue('');
     }
 
     function handleLogout() {

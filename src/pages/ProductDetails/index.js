@@ -1,11 +1,11 @@
 import React, {useState, useMemo} from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 import {Image} from 'react-native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import {useRoute} from '@react-navigation/native';
 import formatValue from '../../utils/formatValue';
 
 import {
@@ -30,10 +30,14 @@ import {
     IconContainer,
 } from './styles';
 
+import {addProductToCart} from '~/store/modules/cart/actions';
+
 const ProductDetails = () => {
     const [foodQuantity, setFoodQuantity] = useState(1);
-    // const navigation = useNavigation();
 
+    const dispatch = useDispatch();
+
+    const navigation = useNavigation();
     const route = useRoute();
 
     const {id} = route.params;
@@ -46,25 +50,24 @@ const ProductDetails = () => {
     const product = useSelector(selectUniqueProduct);
 
     function handleIncrementFood() {
-        // Increment food quantity
         setFoodQuantity(foodQuantity + 1);
     }
 
     function handleDecrementFood() {
-        // Decrement food quantity
         if (foodQuantity === 1) return;
         setFoodQuantity(foodQuantity - 1);
     }
 
-    const cartTotal = useMemo(
-        () =>
-            // Calculate cartTotal
-            formatValue(product.price * foodQuantity),
-        [product, foodQuantity],
-    );
+    const cartTotal = useMemo(() => formatValue(product.price * foodQuantity), [
+        product,
+        foodQuantity,
+    ]);
 
     async function handleFinishOrder() {
-        // Finish the order and save on the API
+        // Finish the order
+        dispatch(addProductToCart(product, foodQuantity));
+
+        navigation.goBack();
     }
 
     return (
@@ -99,7 +102,7 @@ const ProductDetails = () => {
                     </Food>
                 </FoodsContainer>
                 <TotalContainer>
-                    <Title>Total do pedido</Title>
+                    <Title>SubTotal</Title>
                     <PriceButtonContainer>
                         <TotalPrice testID="cart-total">{cartTotal}</TotalPrice>
                         <QuantityContainer>
@@ -128,7 +131,11 @@ const ProductDetails = () => {
                     <FinishOrderButton onPress={() => handleFinishOrder()}>
                         <ButtonText>Adicionar ao carrinho</ButtonText>
                         <IconContainer>
-                            <Icon name="check" size={24} color="#fff" />
+                            <Icon
+                                name="add-shopping-cart"
+                                size={24}
+                                color="#fff"
+                            />
                         </IconContainer>
                     </FinishOrderButton>
                 </TotalContainer>

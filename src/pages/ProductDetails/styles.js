@@ -153,7 +153,7 @@ export const QuantityContainer = styled.View`
 `;
 
 export const FinishOrderButton = styled.TouchableOpacity`
-    background: #39b100;
+    background: #999999;
     border-radius: 8px;
     flex-direction: row;
     align-items: center;
@@ -170,7 +170,7 @@ export const ButtonText = styled.Text`
 `;
 
 export const IconContainer = styled.View`
-    background-color: #41c900;
+    background-color: #a3a3a3;
     padding: 16px;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;

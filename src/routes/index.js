@@ -43,7 +43,7 @@ export default function Routes() {
                             headerLeftContainerStyle: {
                                 marginLeft: 24,
                             },
-                            headerTitle: 'Detalhes',
+                            headerTitle: '',
                             headerTitleStyle: {
                                 color: '#fff',
                                 fontFamily: 'Poppins-Regular',
