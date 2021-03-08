@@ -1,10 +1,10 @@
 import React, {useMemo} from 'react';
-
 import {useSelector, useDispatch} from 'react-redux';
 
 import {Image, View} from 'react-native';
-
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
+import {useNavigation} from '@react-navigation/native';
 import formatValue from '../../utils/formatValue';
 
 import {
@@ -27,6 +27,8 @@ import {
     TotalPrice,
     QuantityContainer,
     AdittionalItemText,
+    EmptyCart,
+    TitleEmpty,
 } from './styles';
 
 import {
@@ -34,8 +36,14 @@ import {
     decrementQuantityProduct,
 } from '~/store/modules/cart/actions';
 
+import ButtonLayout from '~/components/ButtonLayout';
+
+import {Cart} from '~/components/Svg';
+
 const Order = () => {
     const orders = useSelector((state) => state.cart.products);
+
+    const navigation = useNavigation();
 
     const dispatch = useDispatch();
 
@@ -57,12 +65,13 @@ const Order = () => {
         return formatValue(total);
     }, [handleDecrementFood, handleIncrementFood]);
 
+    const handleFinishOrder = () => navigation.navigate('Address');
+
     return (
         <Container>
             <Header>
                 <HeaderTitle>Carrinho</HeaderTitle>
             </Header>
-
             <FoodsContainer>
                 <FoodList
                     data={orders}
@@ -116,19 +125,36 @@ const Order = () => {
                     )}
                 />
             </FoodsContainer>
-            <TotalContainer>
-                <Title>Total do pedido</Title>
-                <PriceButtonContainer>
-                    <TotalPrice testID="cart-total">{cartTotal}</TotalPrice>
-                </PriceButtonContainer>
+            {orders.length > 0 ? (
+                <TotalContainer>
+                    <Title>Total do pedido</Title>
+                    <PriceButtonContainer>
+                        <TotalPrice testID="cart-total">{cartTotal}</TotalPrice>
+                    </PriceButtonContainer>
 
-                <FinishOrderButton onPress={() => null}>
-                    <ButtonText>Finalizar Pedido</ButtonText>
-                    <IconContainer>
-                        <Icon name="check" size={24} color="#fff" />
-                    </IconContainer>
-                </FinishOrderButton>
-            </TotalContainer>
+                    <FinishOrderButton onPress={() => handleFinishOrder()}>
+                        <ButtonText>Finalizar Pedido</ButtonText>
+                        <IconContainer>
+                            <Icon name="check" size={24} color="#fff" />
+                        </IconContainer>
+                    </FinishOrderButton>
+                </TotalContainer>
+            ) : (
+                <EmptyCart>
+                    <View
+                        style={{
+                            alignItems: 'center',
+                        }}>
+                        <Cart height="160px" width="335px" />
+                        <TitleEmpty>Nenhum produto selecionado</TitleEmpty>
+                    </View>
+
+                    <ButtonLayout
+                        onPress={() => navigation.navigate('Listagem')}>
+                        Novo Pedido
+                    </ButtonLayout>
+                </EmptyCart>
+            )}
         </Container>
     );
 };

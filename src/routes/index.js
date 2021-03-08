@@ -9,6 +9,7 @@ import SignUp from '~/pages/SignUp';
 
 import TabRoutes from './tab.routes';
 import ProductDetails from '~/pages/ProductDetails';
+import Address from '~/pages/Address';
 
 const Stack = createStackNavigator();
 const App = createStackNavigator();
@@ -31,6 +32,35 @@ export default function Routes() {
                     <App.Screen
                         name="ProductDetails"
                         component={ProductDetails}
+                        options={({navigation}) => ({
+                            headerLeft: () => (
+                                <Icon
+                                    name="navigate-before"
+                                    size={35}
+                                    color="#FFB84D"
+                                    onPress={() => navigation.goBack()}
+                                />
+                            ),
+                            headerLeftContainerStyle: {
+                                marginLeft: 24,
+                            },
+                            headerTitle: '',
+                            headerTitleStyle: {
+                                color: '#fff',
+                                fontFamily: 'Poppins-Regular',
+                                fontSize: 16,
+                            },
+                            headerStyle: {
+                                backgroundColor: '#C72828',
+                                elevation: 0,
+                                borderWidth: 0,
+                                shadowColor: 'transparent',
+                            },
+                        })}
+                    />
+                    <App.Screen
+                        name="Address"
+                        component={Address}
                         options={({navigation}) => ({
                             headerLeft: () => (
                                 <Icon

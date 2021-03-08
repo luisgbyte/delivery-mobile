@@ -1,7 +1,8 @@
 import React, {useRef, useState} from 'react';
 
 import {useDispatch, useSelector} from 'react-redux';
-import Logo from '~/components/Logo';
+
+import {Logo} from '~/components/Svg';
 
 import Background from '~/components/Background';
 import {signUpRequest} from '~/store/modules/auth/actions';

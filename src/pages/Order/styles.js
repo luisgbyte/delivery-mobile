@@ -64,16 +64,12 @@ export const FoodTitle = styled.Text`
 
 export const FoodPricing = styled.Text`
     font-family: 'Poppins-Regular';
-    font-style: normal;
-    font-weight: normal;
     font-size: 18px;
     line-height: 21px;
     margin-top: 8px;
     font-weight: 600;
     color: #39b100;
 `;
-
-///
 
 export const FinishOrderButton = styled.TouchableOpacity`
     background: #39b100;
@@ -106,8 +102,6 @@ export const TotalContainer = styled.View`
 `;
 
 export const Title = styled.Text`
-    font-family: Poppins;
-    font-style: normal;
     font-weight: 600;
     font-size: 20px;
     line-height: 30px;
@@ -122,8 +116,6 @@ export const PriceButtonContainer = styled.View`
 `;
 
 export const TotalPrice = styled.Text`
-    font-family: 'Poppins';
-    font-weight: 900;
     font-size: 24px;
     line-height: 28px;
     color: #39b100;
@@ -139,12 +131,25 @@ export const QuantityContainer = styled.View`
     background: #f0f0f5;
     border-radius: 8px;
     padding: 10px 20px;
-    /* border: 1px solid red; */
 `;
 
 export const AdittionalItemText = styled.Text`
     font-family: 'Poppins-Regular';
-    /* font-weight: bold; */
     font-size: 20px;
     color: #6c6c80;
+`;
+
+export const EmptyCart = styled.View`
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+`;
+
+export const TitleEmpty = styled.Text`
+    margin-top: 20px;
+    font-family: 'Poppins-Regular';
+    font-size: 18px;
+    color: gray;
+    text-align: center;
 `;
