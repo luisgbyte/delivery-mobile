@@ -1,14 +1,17 @@
 import React, {useRef, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
+import {Form} from '@unform/mobile';
 import {Logo} from '~/components/Svg';
 
 import Background from '~/components/Background';
 import {signInRequest} from '~/store/modules/auth/actions';
 
+// import Input from '~/components/Form/Input';
+
 import {
     Container,
-    Form,
+    // Form,
     FormInput,
     SubmitButton,
     SignLink,
@@ -17,7 +20,6 @@ import {
 
 const SignIn = ({navigation}) => {
     const dispath = useDispatch();
-    const passwordRef = useRef();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -28,29 +30,33 @@ const SignIn = ({navigation}) => {
         console.tron.log('test5');
         dispath(signInRequest(email, password));
     }
+    const formRef = useRef(null);
 
     return (
         <Background>
             <Container>
                 <Logo height="150px" width="150px" />
-                <Form>
+                <Form ref={formRef}>
                     <FormInput
+                        name="email"
                         icon="mail-outline"
                         keyboardType="email-address"
                         autoCorrect={false}
                         autoCapitalize="none"
                         placeholder="Digite seu e-mail"
                         returnKeyType="next"
-                        onSubmitEditing={() => passwordRef.current.focus()}
+                        onSubmitEditing={() =>
+                            formRef.current.getFieldRef('password').focus()
+                        }
                         value={email}
                         onChangeText={setEmail}
                     />
 
                     <FormInput
+                        name="password"
                         icon="lock-outline"
                         secureTextEntry
                         placeholder="Sua senha secreta"
-                        ref={passwordRef}
                         returnKeyType="send"
                         onSubmitEditing={handleSubmit}
                         value={password}
