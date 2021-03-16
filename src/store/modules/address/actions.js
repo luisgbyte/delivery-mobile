@@ -11,6 +11,20 @@ export function addressSuccess(address) {
     };
 }
 
+export function addressUpdate(data) {
+    return {
+        type: '@address/ADDRESS_UPDATE',
+        payload: {data},
+    };
+}
+
+export function addressCreate(data) {
+    return {
+        type: '@address/ADDRESS_CREATE',
+        payload: {data},
+    };
+}
+
 export function addressFailure() {
     return {
         type: '@address/ADDRESS_FAILURE',

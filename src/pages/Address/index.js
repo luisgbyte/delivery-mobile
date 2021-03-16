@@ -27,13 +27,12 @@ const Address = () => {
 
     const navigation = useNavigation();
 
-    useEffect(() => {
-        dispatch(addressRequest());
-    }, []);
-
+    const [modalVisible, setModalVisible] = useState(false);
     const {address} = useSelector((state) => state.address);
 
-    const [modalVisible, setModalVisible] = useState(false);
+    useEffect(() => {
+        dispatch(addressRequest());
+    }, [address]);
 
     return (
         <>
@@ -50,7 +49,7 @@ const Address = () => {
                             <Field>{address.street}</Field>
                             <Field>{address.neighborhood}</Field>
                             <Field>Nº {address.number}</Field>
-                            <Field>{address.number}</Field>
+                            <Field>{address.city}</Field>
                         </Card>
                     )}
                 </View>

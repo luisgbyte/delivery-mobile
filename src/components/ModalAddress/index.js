@@ -1,12 +1,14 @@
 import React, {useState, useRef} from 'react';
 import {Form} from '@unform/mobile';
 
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import * as Yup from 'yup';
 
 import {Text, Button, View, Modal, StyleSheet} from 'react-native';
 
 import {FormInput} from './styles';
+
+import {addressUpdate, addressCreate} from '~/store/modules/address/actions';
 
 const styles = StyleSheet.create({
     centeredView: {
@@ -36,6 +38,11 @@ function ModalAddress({modalVisible, setModalVisible}) {
 
     const [validationErrors, setValidationErrors] = useState([]);
 
+    const {address} = useSelector((state) => state.address);
+
+    const dispatch = useDispatch();
+
+    // validation e submit
     async function handleSubmit(data) {
         try {
             // Remove all previous errors
@@ -53,22 +60,25 @@ function ModalAddress({modalVisible, setModalVisible}) {
             });
 
             // Validation passed
-            console.tron.log(data);
+            if (address) {
+                dispatch(addressUpdate(data));
+            } else {
+                dispatch(addressCreate(data));
+            }
+
+            setModalVisible(false);
         } catch (err) {
             const errors = [];
 
             if (err instanceof Yup.ValidationError) {
                 err.inner.forEach((error) => {
                     errors.push(error.message);
-                    console.tron.log(error.message);
                 });
 
                 setValidationErrors([...errors]);
             }
         }
     }
-
-    const {address} = useSelector((state) => state.address);
 
     return (
         <Modal

@@ -4,7 +4,7 @@ import {Alert} from 'react-native';
 
 import api from '~/services/api';
 
-import {addressSuccess, addressFailure} from './actions';
+import {addressSuccess, addressFailure, addressRequest} from './actions';
 
 export function* requestAddress() {
     try {
@@ -17,4 +17,36 @@ export function* requestAddress() {
     }
 }
 
-export default all([takeLatest('@address/ADDRESS_REQUEST', requestAddress)]);
+export function* updateAddress({payload}) {
+    try {
+        const {data} = payload;
+
+        yield call(api.put, 'addresses', data);
+
+        yield put(addressRequest());
+        Alert.alert('Sucesso!');
+    } catch (err) {
+        yield put(addressFailure());
+        Alert.alert('Erro ao atualizar dados!');
+    }
+}
+
+export function* createAddress({payload}) {
+    try {
+        const {data} = payload;
+
+        yield call(api.post, 'addresses', data);
+
+        yield put(addressRequest());
+        Alert.alert('Endereço criado com sucesso!');
+    } catch (err) {
+        yield put(addressFailure());
+        Alert.alert('Erro ao atualizar dados!');
+    }
+}
+
+export default all([
+    takeLatest('@address/ADDRESS_REQUEST', requestAddress),
+    takeLatest('@address/ADDRESS_UPDATE', updateAddress),
+    takeLatest('@address/ADDRESS_CREATE', createAddress),
+]);
