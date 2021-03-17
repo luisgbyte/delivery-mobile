@@ -32,7 +32,7 @@ const Address = () => {
 
     useEffect(() => {
         dispatch(addressRequest());
-    }, [address]);
+    }, []);
 
     return (
         <>
