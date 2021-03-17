@@ -3,7 +3,7 @@ import {Text} from 'react-native';
 import {useField} from '@unform/core';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {TxtInput, Container} from './styles';
+import {TxtInput, Container, ContainerError} from './styles';
 
 function Input({style, icon, name, onChangeText, ...rest}) {
     const inputRef = useRef(null);
@@ -52,21 +52,30 @@ function Input({style, icon, name, onChangeText, ...rest}) {
     );
 
     return (
-        <Container style={style}>
-            {!!icon && (
-                <Icon name={icon} size={20} color="rgba(255, 255, 255, 0.6)" />
+        <>
+            <Container style={style}>
+                {!!icon && (
+                    <Icon
+                        name={icon}
+                        size={20}
+                        color="rgba(255, 255, 255, 0.6)"
+                    />
+                )}
+
+                <TxtInput
+                    ref={inputRef}
+                    onChangeText={handleChangeText}
+                    defaultValue={defaultValue}
+                    className={error ? 'has-error' : ''}
+                    {...rest}
+                />
+            </Container>
+            {error && (
+                <ContainerError>
+                    <Text className="error">{error}</Text>
+                </ContainerError>
             )}
-
-            <TxtInput
-                ref={inputRef}
-                onChangeText={handleChangeText}
-                defaultValue={defaultValue}
-                className={error ? 'has-error' : ''}
-                {...rest}
-            />
-
-            {error && <Text className="error">{error}</Text>}
-        </Container>
+        </>
     );
 }
 

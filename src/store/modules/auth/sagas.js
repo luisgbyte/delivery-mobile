@@ -6,13 +6,10 @@ import api from '~/services/api';
 import {signInSuccess, signUpSuccess, signFailure} from './actions';
 
 export function* signIn({payload}) {
-    console.tron.log(payload);
+    console.tron.log('sagas', payload);
     try {
-        const {email, password} = payload;
-        const response = yield call(api.post, 'sessions', {
-            email,
-            password,
-        });
+        const {data} = payload;
+        const response = yield call(api.post, 'sessions', data);
 
         const {token, user} = response.data;
         yield put(signInSuccess(token, user));
@@ -31,16 +28,13 @@ export function* signIn({payload}) {
 
 export function* signUp({payload}) {
     try {
-        const {name, email, password} = payload;
+        const {data} = payload;
 
-        yield call(api.post, 'clients', {
-            name,
-            email,
-            password,
-        });
+        yield call(api.post, 'clients', data);
 
         yield put(signUpSuccess());
         // history.push('/dashboard');
+        Alert.alert('Sucesso', 'Seu cadastro foi realizado com sucesso!');
     } catch (err) {
         Alert.alert(
             'Falha no Cadastro',
