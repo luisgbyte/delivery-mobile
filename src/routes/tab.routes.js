@@ -13,7 +13,7 @@ const Tab = createBottomTabNavigator();
 
 function TabRoutes() {
     const cartCount = useSelector((state) => state.cart.products.length);
-    console.tron.log(cartCount);
+
     return (
         <Tab.Navigator
             screenOptions={({route}) => ({

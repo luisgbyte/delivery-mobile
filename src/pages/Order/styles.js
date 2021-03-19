@@ -54,12 +54,15 @@ export const FoodContent = styled.View`
     justify-content: space-between;
     padding: 16px;
 `;
+
 export const FoodTitle = styled.Text`
     font-family: 'Poppins-Regular';
     font-weight: 600;
     font-size: 15px;
     line-height: 22px;
     color: #3d3d4d;
+    max-width: 100px;
+    flex-wrap: wrap;
 `;
 
 export const FoodPricing = styled.Text`

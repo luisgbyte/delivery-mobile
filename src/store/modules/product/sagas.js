@@ -6,9 +6,14 @@ import api from '~/services/api';
 
 import {productSuccess, productFailure} from './actions';
 
-export function* requestProducts() {
+export function* requestProducts({payload}, loading) {
     try {
-        const response = yield call(api.get, 'products');
+        if (loading) return;
+        const {page} = payload;
+
+        const response = yield call(api.get, 'products', {
+            params: {page},
+        });
 
         yield put(productSuccess(response.data));
     } catch (err) {

@@ -131,11 +131,7 @@ const ProductDetails = () => {
                     <FinishOrderButton onPress={() => handleFinishOrder()}>
                         <ButtonText>Adicionar ao carrinho</ButtonText>
                         <IconContainer>
-                            <Icon
-                                name="add-shopping-cart"
-                                size={24}
-                                color="#fff"
-                            />
+                            <Icon name="done" size={24} color="#fff" />
                         </IconContainer>
                     </FinishOrderButton>
                 </TotalContainer>
