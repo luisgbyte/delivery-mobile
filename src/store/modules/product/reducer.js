@@ -2,7 +2,6 @@ import produce from 'immer';
 
 const INITIAL_STATE = {
     products: [],
-    count: 0,
     loading: false,
 };
 
@@ -15,11 +14,8 @@ export default function products(state = INITIAL_STATE, action) {
 
         case '@product/PRODUCT_SUCCESS': // Request
             return produce(state, (draft) => {
-                const {rows, count} = action.payload.products;
-
-                draft.products = [...draft.products, ...rows];
-                draft.count = count;
-
+                const data = action.payload.products;
+                draft.products = [...data];
                 draft.loading = false;
             });
 

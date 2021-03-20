@@ -5,9 +5,9 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import Listing from '~/pages/Listing';
+import Home from '~/pages/Home';
 import Profile from '~/pages/Profile';
-import Order from '~/pages/Order';
+import Card from '~/pages/Card';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,7 +20,7 @@ function TabRoutes() {
                 tabBarIcon: ({color}) => {
                     let iconName;
 
-                    if (route.name === 'Listagem') {
+                    if (route.name === 'Home') {
                         iconName = 'menu';
                     } else if (route.name === 'Carrinho') {
                         iconName = 'shopping-cart';
@@ -42,10 +42,10 @@ function TabRoutes() {
                     borderTopColor: 'transparent',
                 },
             }}>
-            <Tab.Screen name="Listagem" component={Listing} />
+            <Tab.Screen name="Home" component={Home} />
             <Tab.Screen
                 name="Carrinho"
-                component={Order}
+                component={Card}
                 options={cartCount > 0 ? {tabBarBadge: cartCount} : null}
             />
             <Tab.Screen name="Perfil" component={Profile} />

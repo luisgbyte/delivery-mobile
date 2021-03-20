@@ -40,7 +40,7 @@ import ButtonLayout from '~/components/ButtonLayout';
 
 import {Cart} from '~/components/Svg';
 
-const Order = () => {
+const Card = () => {
     const orders = useSelector((state) => state.cart.products);
 
     const navigation = useNavigation();
@@ -149,8 +149,7 @@ const Order = () => {
                         <TitleEmpty>Nenhum produto selecionado</TitleEmpty>
                     </View>
 
-                    <ButtonLayout
-                        onPress={() => navigation.navigate('Listagem')}>
+                    <ButtonLayout onPress={() => navigation.navigate('Home')}>
                         Novo Pedido
                     </ButtonLayout>
                 </EmptyCart>
@@ -159,4 +158,4 @@ const Order = () => {
     );
 };
 
-export default Order;
+export default Card;

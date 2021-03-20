@@ -1,5 +1,5 @@
 import styled, {css} from 'styled-components/native';
-import {FlatList} from 'react-native';
+// import {FlatList} from 'react-native';
 
 export const Container = styled.View`
     flex: 1;
@@ -69,20 +69,20 @@ export const CategoryItemTitle = styled.Text`
 `;
 
 export const FoodsContainer = styled.View`
-    /* margin-top: 15px; */
+    margin-top: 15px;
     flex: 1;
 `;
 
-// export const FoodList = styled.View`
-//     padding: 0 20px;
-//     margin-top: 16px;
-// `;
-
-export const FoodList = styled(FlatList)`
-    flex: 1;
+export const FoodList = styled.View`
     padding: 0 20px;
-    margin-top: 0px;
+    margin-top: 16px;
 `;
+
+// export const FoodList = styled(FlatList)`
+//     flex: 1;
+//     padding: 0 20px;
+//     margin-top: 0px;
+// `;
 
 export const Food = styled.TouchableOpacity`
     display: flex;

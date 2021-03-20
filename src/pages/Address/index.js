@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View} from 'react-native';
+import {ActivityIndicator, View} from 'react-native';
 
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -28,7 +28,7 @@ const Address = () => {
     const navigation = useNavigation();
 
     const [modalVisible, setModalVisible] = useState(false);
-    const {address} = useSelector((state) => state.address);
+    const {address, loading} = useSelector((state) => state.address);
 
     useEffect(() => {
         dispatch(addressRequest());
@@ -37,26 +37,30 @@ const Address = () => {
     return (
         <>
             <Container>
-                <View>
-                    <Head>
-                        <Title>Endereço</Title>
-                        <Edit onPress={() => setModalVisible(true)}>
-                            {address ? 'Editar' : 'Novo Endereço'}
-                        </Edit>
-                    </Head>
-                    {address && (
-                        <Card>
-                            <Field>{address.street}</Field>
-                            <Field>{address.neighborhood}</Field>
-                            <Field>Nº {address.number}</Field>
-                            <Field>{address.city}</Field>
-                        </Card>
-                    )}
-                </View>
+                {!loading ? (
+                    <View>
+                        <Head>
+                            <Title>Endereço</Title>
+                            <Edit onPress={() => setModalVisible(true)}>
+                                {address ? 'Editar' : 'Novo Endereço'}
+                            </Edit>
+                        </Head>
+                        {address && (
+                            <Card>
+                                <Field>{address.street}</Field>
+                                <Field>{address.neighborhood}</Field>
+                                <Field>Nº {address.number}</Field>
+                                <Field>{address.city}</Field>
+                            </Card>
+                        )}
+                    </View>
+                ) : (
+                    <ActivityIndicator size="large" color="#c72820" />
+                )}
                 {!!address && (
                     <FinishOrderButton
                         onPress={() => navigation.navigate('Payment')}>
-                        <ButtonText>Confirmar Endereço</ButtonText>
+                        <ButtonText>Finalizar Pedido</ButtonText>
                         <IconContainer>
                             <Icon name="check" size={24} color="#fff" />
                         </IconContainer>

@@ -1,7 +1,6 @@
-export function productRequest(page) {
+export function productRequest() {
     return {
         type: '@product/PRODUCT_REQUEST',
-        payload: {page},
     };
 }
 
