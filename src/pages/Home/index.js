@@ -77,7 +77,7 @@ const Home = ({navigation}) => {
                 <SearchInput
                     value={searchValue}
                     onChangeText={setSearchValue}
-                    placeholder="Hey, o que você está procurando?"
+                    placeholder="O que você procura?"
                 />
             </FilterContainer>
             <FoodsContainer>

@@ -8,7 +8,13 @@ import {TxtInput, Container, ContainerError} from './styles';
 function Input({style, icon, name, onChangeText, ...rest}) {
     const inputRef = useRef(null);
 
-    const {fieldName, registerField, defaultValue, error} = useField(name);
+    const {
+        fieldName,
+        registerField,
+        defaultValue,
+        error,
+        clearError,
+    } = useField(name);
 
     useEffect(() => {
         inputRef.current.value = defaultValue;
@@ -67,6 +73,7 @@ function Input({style, icon, name, onChangeText, ...rest}) {
                     onChangeText={handleChangeText}
                     defaultValue={defaultValue}
                     className={error ? 'has-error' : ''}
+                    onFocus={clearError}
                     {...rest}
                 />
             </Container>

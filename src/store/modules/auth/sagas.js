@@ -6,7 +6,6 @@ import api from '~/services/api';
 import {signInSuccess, signUpSuccess, signFailure} from './actions';
 
 export function* signIn({payload}) {
-    console.tron.log('sagas', payload);
     try {
         const {data} = payload;
         const response = yield call(api.post, 'sessions', data);
