@@ -24,10 +24,10 @@ export function* updateAddress({payload}) {
         yield call(api.put, 'addresses', data);
 
         yield put(addressRequest());
-        Alert.alert('Sucesso!');
+        Alert.alert('Endereço atualizado com sucesso!');
     } catch (err) {
         yield put(addressFailure());
-        Alert.alert('Erro ao atualizar dados!');
+        Alert.alert('Erro ao atualizar endereço!');
     }
 }
 

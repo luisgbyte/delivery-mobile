@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import Input from '~/components/Input';
 
 export const Container = styled.View`
     padding: 0 20px;
@@ -69,8 +68,4 @@ export const IconContainer = styled.View`
     padding: 16px;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
-`;
-
-export const FormInput = styled(Input)`
-    margin-bottom: 15px;
 `;

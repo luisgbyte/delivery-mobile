@@ -25,8 +25,15 @@ export function decrementQuantityProduct(index) {
     };
 }
 
-export function finishOrder() {
+export function finishOrder(payment) {
     return {
         type: '@cart/FINISH_ORDER',
+        payload: {payment},
+    };
+}
+
+export function clearCart() {
+    return {
+        type: '@cart/CLEAR_CART',
     };
 }

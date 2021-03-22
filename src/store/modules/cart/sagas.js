@@ -1,27 +1,38 @@
-// import {takeLatest, call, all, select} from 'redux-saga/effects';
+import {takeLatest, call, all, put, select} from 'redux-saga/effects';
 
-// import {Alert} from 'react-native';
+import {Alert} from 'react-native';
 
-// import api from '~/services/api';
+import api from '~/services/api';
 
-// const getCart = (state) => state.cart.products;
+import {clearCart} from './actions';
 
-// export function* finish() {
-//     try {
-//         const cart = yield select(getCart);
+const getCart = (state) => state.cart.products;
 
-//         // formatting cart for requisition
-//         const formattedCart = cart.map((item) => ({
-//             product_id: item.id,
-//             quantity: item.quantity,
-//         }));
+export function* finish({payload}) {
+    try {
+        const cart = yield select(getCart);
+        const {payment, chance} = payload;
 
-//         console.tron.log(formattedCart);
+        // formatting cart for requisition
+        const formattedCart = cart.map((item) => ({
+            product_id: item.id,
+            quantity: item.quantity,
+        }));
 
-//         yield call(api.post, 'orders', formattedCart);
-//     } catch (err) {
-//         Alert.alert('Erro ao finalizar pedido!');
-//     }
-// }
+        // formatting
+        const order = {
+            products: formattedCart,
+            payments: {type: payment, chance},
+        };
+        // console.tron.log('order', order);
+        yield call(api.post, 'orders', order);
 
-// export default all([takeLatest('@cart/FINISH_ORDER', finish)]);
+        yield put(clearCart());
+
+        Alert.alert('Sucesso', 'Seu pedido foi finalizado com sucesso!');
+    } catch (err) {
+        Alert.alert('Error', 'Erro ao finalizar pedido, tente novamente!');
+    }
+}
+
+export default all([takeLatest('@cart/FINISH_ORDER', finish)]);

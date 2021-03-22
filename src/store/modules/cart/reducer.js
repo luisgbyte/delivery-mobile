@@ -2,6 +2,7 @@ import produce from 'immer';
 
 const INITIAL_STATE = {
     products: [],
+    loading: false,
 };
 
 export default function cart(state = INITIAL_STATE, action) {
@@ -39,6 +40,17 @@ export default function cart(state = INITIAL_STATE, action) {
                 if (draft.products[index].quantity < 1) {
                     draft.products.splice(index, 1);
                 }
+            });
+
+        case '@cart/FINISH_ORDER':
+            return produce(state, (draft) => {
+                draft.loading = true;
+            });
+
+        case '@cart/CLEAR_CART':
+            return produce(state, (draft) => {
+                draft.products = [];
+                draft.loading = false;
             });
 
         default:

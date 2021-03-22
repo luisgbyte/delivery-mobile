@@ -8,6 +8,13 @@ export const Container = styled.View`
     justify-content: space-between;
 `;
 
+export const Title = styled.Text`
+    font-family: 'Poppins-Regular';
+    font-size: 20px;
+    font-weight: bold;
+    color: #3d3d4d;
+`;
+
 export const Card = styled.View`
     display: flex;
     flex-direction: column;

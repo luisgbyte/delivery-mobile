@@ -1,8 +1,14 @@
-import React from 'react';
-import {View, Text} from 'react-native';
+import React, {useState} from 'react';
+import {View} from 'react-native';
+
+import {useDispatch} from 'react-redux';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {useNavigation} from '@react-navigation/native';
+// import {useNavigation} from '@react-navigation/native';
+
+import RadioForm from 'react-native-simple-radio-button';
+
+import {finishOrder} from '~/store/modules/cart/actions';
 
 import {
     Container,
@@ -12,23 +18,37 @@ import {
     IconContainer,
 } from './styles';
 
+const radio_props = [
+    {label: 'Cartão de Crédito (Entregador)', value: 'cartao_credito'},
+    {label: 'Cartão de Débito (Entregador)', value: 'cartao_debito'},
+    {label: 'Dinheiro', value: 'dinheiro'},
+];
+
 const Payment = () => {
-    const navigation = useNavigation();
+    // const navigation = useNavigation();
+    const [payment, setPayment] = useState('dinheiro');
+
+    const dispatch = useDispatch();
+
+    console.tron.log(payment);
 
     return (
         <Container>
             <View>
                 <Card>
-                    <Text>Cartão crédito (Entregador)</Text>
-                </Card>
-                <Card>
-                    <Text>Cartão débito (Entregador)</Text>
-                </Card>
-                <Card>
-                    <Text>Dinheiro</Text>
+                    <RadioForm
+                        radio_props={radio_props}
+                        initial={2}
+                        buttonColor="#2196f3"
+                        animation
+                        labelStyle={{fontSize: 16, color: 'black'}}
+                        buttonSize={18}
+                        onPress={(value) => setPayment(value)}
+                    />
                 </Card>
             </View>
-            <FinishOrderButton onPress={() => navigation.navigate('Payment')}>
+
+            <FinishOrderButton onPress={() => dispatch(finishOrder(payment))}>
                 <ButtonText>Finalizar Pedido</ButtonText>
                 <IconContainer>
                     <Icon name="check" size={24} color="#fff" />
