@@ -8,13 +8,15 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
 import {StatusBar} from 'react-native';
 
+import {navigationRef} from './RootNavigation';
+
 import {store, persistor} from '~/store';
 import Routes from '~/routes';
 
 const index = () => (
     <Provider store={store}>
         <PersistGate persistor={persistor}>
-            <NavigationContainer>
+            <NavigationContainer ref={navigationRef}>
                 <StatusBar barStyle="light-content" backgroundColor="#c72820" />
                 <Routes />
             </NavigationContainer>

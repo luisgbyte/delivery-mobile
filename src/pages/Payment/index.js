@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {View} from 'react-native';
+import {View, ActivityIndicator} from 'react-native';
 
-import {useDispatch} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 // import {useNavigation} from '@react-navigation/native';
@@ -30,7 +30,9 @@ const Payment = () => {
 
     const dispatch = useDispatch();
 
-    console.tron.log(payment);
+    const {loading} = useSelector((state) => state.cart);
+
+    console.tron.log(payment, loading);
 
     return (
         <Container>
@@ -47,7 +49,9 @@ const Payment = () => {
                     />
                 </Card>
             </View>
-
+            {loading ? (
+                <ActivityIndicator size="large" color="#c72820" />
+            ) : null}
             <FinishOrderButton onPress={() => dispatch(finishOrder(payment))}>
                 <ButtonText>Finalizar Pedido</ButtonText>
                 <IconContainer>

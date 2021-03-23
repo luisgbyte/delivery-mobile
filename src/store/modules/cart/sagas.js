@@ -1,10 +1,10 @@
-import {takeLatest, call, all, put, select} from 'redux-saga/effects';
-
+import {takeLatest, call, all, put, delay, select} from 'redux-saga/effects';
 import {Alert} from 'react-native';
+import * as RootNavigation from '~/RootNavigation';
 
 import api from '~/services/api';
 
-import {clearCart} from './actions';
+import {cartFailure, cartSuccess} from './actions';
 
 const getCart = (state) => state.cart.products;
 
@@ -24,13 +24,16 @@ export function* finish({payload}) {
             products: formattedCart,
             payments: {type: payment, chance},
         };
-        // console.tron.log('order', order);
+
         yield call(api.post, 'orders', order);
 
-        yield put(clearCart());
-
+        yield put(cartSuccess());
         Alert.alert('Sucesso', 'Seu pedido foi finalizado com sucesso!');
+
+        yield delay(500);
+        yield RootNavigation.navigate('Pedidos');
     } catch (err) {
+        yield put(cartFailure());
         Alert.alert('Error', 'Erro ao finalizar pedido, tente novamente!');
     }
 }

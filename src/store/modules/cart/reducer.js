@@ -47,7 +47,12 @@ export default function cart(state = INITIAL_STATE, action) {
                 draft.loading = true;
             });
 
-        case '@cart/CLEAR_CART':
+        case '@cart/CART_FAILURE':
+            return produce(state, (draft) => {
+                draft.loading = false;
+            });
+
+        case '@cart/CART_SUCCESS':
             return produce(state, (draft) => {
                 draft.products = [];
                 draft.loading = false;

@@ -1,5 +1,4 @@
 import React from 'react';
-import {Text} from 'react-native';
 import {useSelector} from 'react-redux';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -9,8 +8,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Home from '~/pages/Home';
 import Profile from '~/pages/Profile';
 import Card from '~/pages/Card';
-
-const Test = () => <Text>HelloWorld!</Text>;
+import Orders from '~/pages/Orders';
 
 const Tab = createBottomTabNavigator();
 
@@ -48,7 +46,7 @@ function TabRoutes() {
                 },
             }}>
             <Tab.Screen name="Home" component={Home} />
-            <Tab.Screen name="Pedidos" component={Test} />
+            <Tab.Screen name="Pedidos" component={Orders} />
             <Tab.Screen
                 name="Carrinho"
                 component={Card}

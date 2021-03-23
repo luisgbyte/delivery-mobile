@@ -37,3 +37,15 @@ export function clearCart() {
         type: '@cart/CLEAR_CART',
     };
 }
+
+export function cartFailure() {
+    return {
+        type: '@cart/CART_FAILURE',
+    };
+}
+
+export function cartSuccess() {
+    return {
+        type: '@cart/CART_SUCCESS',
+    };
+}
