@@ -26,12 +26,15 @@ import {
     FoodPricing,
 } from './styles';
 
+import {orderRequest} from '~/store/modules/order/actions';
+
 const Home = ({navigation}) => {
     const [searchValue, setSearchValue] = useState('');
 
     const dispatch = useDispatch();
 
     useEffect(() => {
+        dispatch(orderRequest());
         dispatch(productRequest());
     }, []);
 
@@ -85,7 +88,7 @@ const Home = ({navigation}) => {
                 {loading ? (
                     <ActivityIndicator size="large" color="#c72820" />
                 ) : (
-                    <ScrollView>
+                    <ScrollView showsVerticalScrollIndicator={false}>
                         <FoodList>
                             {!!products &&
                                 products.map((product) => (

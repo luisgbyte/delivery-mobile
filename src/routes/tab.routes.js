@@ -14,6 +14,7 @@ const Tab = createBottomTabNavigator();
 
 function TabRoutes() {
     const cartCount = useSelector((state) => state.cart.products.length);
+    const orderCount = useSelector((state) => state.order.orders.length);
 
     return (
         <Tab.Navigator
@@ -46,7 +47,11 @@ function TabRoutes() {
                 },
             }}>
             <Tab.Screen name="Home" component={Home} />
-            <Tab.Screen name="Pedidos" component={Orders} />
+            <Tab.Screen
+                name="Pedidos"
+                component={Orders}
+                options={orderCount > 0 ? {tabBarBadge: orderCount} : null}
+            />
             <Tab.Screen
                 name="Carrinho"
                 component={Card}

@@ -4,7 +4,6 @@ import {View, ActivityIndicator} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
-// import {useNavigation} from '@react-navigation/native';
 
 import RadioForm from 'react-native-simple-radio-button';
 
@@ -25,14 +24,11 @@ const radio_props = [
 ];
 
 const Payment = () => {
-    // const navigation = useNavigation();
     const [payment, setPayment] = useState('dinheiro');
 
     const dispatch = useDispatch();
 
     const {loading} = useSelector((state) => state.cart);
-
-    console.tron.log(payment, loading);
 
     return (
         <Container>
