@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Image, Text, ScrollView, ActivityIndicator, View} from 'react-native';
-import {useFocusEffect} from '@react-navigation/native';
+// import {useFocusEffect} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {useDispatch, useSelector} from 'react-redux';
@@ -37,8 +37,14 @@ const Home = ({navigation}) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(orderRequest());
         dispatch(productRequest());
+        dispatch(orderRequest());
+
+        const interval = setInterval(() => {
+            dispatch(productRequest());
+        }, 50000);
+
+        return () => clearInterval(interval);
     }, []);
 
     const filterProducts = ({product}) => {
@@ -52,7 +58,7 @@ const Home = ({navigation}) => {
     const products = useSelector(filterProducts);
 
     const {loading} = useSelector((state) => state.product);
-    console.tron.log(products);
+
     async function handleNavigate(id) {
         // Navigate do ProductDetails page
         navigation.navigate('ProductDetails', {
