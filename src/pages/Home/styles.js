@@ -134,3 +134,11 @@ export const FoodPricing = styled.Text`
     font-weight: 600;
     color: #39b100;
 `;
+
+export const TitleEmpty = styled.Text`
+    margin-top: 20px;
+    font-family: 'Poppins-Regular';
+    font-size: 18px;
+    color: gray;
+    text-align: center;
+`;

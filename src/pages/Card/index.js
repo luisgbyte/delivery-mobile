@@ -145,8 +145,11 @@ const Card = () => {
                         style={{
                             alignItems: 'center',
                         }}>
-                        <Cart height="160px" width="335px" />
-                        <TitleEmpty>Nenhum produto selecionado</TitleEmpty>
+                        <Cart height="190px" width="300px" />
+                        <TitleEmpty>
+                            Nenhum produto, clique no botão abaixo e adicione
+                            produtos ao carrinho
+                        </TitleEmpty>
                     </View>
 
                     <ButtonLayout onPress={() => navigation.navigate('Home')}>

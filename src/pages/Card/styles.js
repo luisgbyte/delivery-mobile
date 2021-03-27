@@ -147,6 +147,7 @@ export const EmptyCart = styled.View`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    padding: 0 20px;
 `;
 
 export const TitleEmpty = styled.Text`

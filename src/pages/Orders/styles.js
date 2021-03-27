@@ -69,7 +69,7 @@ export const OrderStatus = styled.Text`
     font-family: 'Poppins-Regular';
     font-weight: bold;
     font-size: 18px;
-    color: #468faf;
+    color: #c72820;
 `;
 
 export const CardFooter = styled.View`
@@ -83,4 +83,12 @@ export const Content = styled.ScrollView`
     margin-top: 16px;
     display: flex;
     flex: 1;
+`;
+
+export const TitleEmpty = styled.Text`
+    margin-top: 20px;
+    font-family: 'Poppins-Regular';
+    font-size: 18px;
+    color: gray;
+    text-align: center;
 `;

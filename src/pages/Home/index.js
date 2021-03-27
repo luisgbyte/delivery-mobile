@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {Image, Text, ScrollView, ActivityIndicator} from 'react-native';
-
+import {Image, Text, ScrollView, ActivityIndicator, View} from 'react-native';
+import {useFocusEffect} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {useDispatch, useSelector} from 'react-redux';
@@ -24,7 +24,10 @@ import {
     FoodTitle,
     FoodDescription,
     FoodPricing,
+    TitleEmpty,
 } from './styles';
+
+import {NoConnection} from '~/components/Svg';
 
 import {orderRequest} from '~/store/modules/order/actions';
 
@@ -47,8 +50,9 @@ const Home = ({navigation}) => {
     };
 
     const products = useSelector(filterProducts);
-    const {loading} = useSelector((state) => state.product);
 
+    const {loading} = useSelector((state) => state.product);
+    console.tron.log(products);
     async function handleNavigate(id) {
         // Navigate do ProductDetails page
         navigation.navigate('ProductDetails', {
@@ -90,7 +94,7 @@ const Home = ({navigation}) => {
                 ) : (
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <FoodList>
-                            {!!products &&
+                            {products.length > 0 ? (
                                 products.map((product) => (
                                     <Food
                                         key={product.id}
@@ -121,7 +125,22 @@ const Home = ({navigation}) => {
                                             </FoodPricing>
                                         </FoodContent>
                                     </Food>
-                                ))}
+                                ))
+                            ) : (
+                                <View
+                                    style={{
+                                        alignItems: 'center',
+                                    }}>
+                                    <NoConnection
+                                        height="190px"
+                                        width="300px"
+                                    />
+                                    <TitleEmpty>
+                                        Não foi possível estabelecer a conexão,
+                                        verifique seu acesso à internet
+                                    </TitleEmpty>
+                                </View>
+                            )}
                         </FoodList>
                     </ScrollView>
                 )}
