@@ -3,13 +3,13 @@ import {takeLatest, call, put, all} from 'redux-saga/effects';
 
 import api from '~/services/api';
 
-import {orderFailure, orderSuccess} from './actions';
+import {orderFailure, orderRequestSuccess, orderCancelSuccess} from './actions';
 
 export function* orderRequest() {
     try {
         const response = yield call(api.get, 'orders');
 
-        yield put(orderSuccess(response.data));
+        yield put(orderRequestSuccess(response.data));
     } catch (err) {
         Alert.alert('Error', 'Erro carregar pedidos!');
 
@@ -17,4 +17,26 @@ export function* orderRequest() {
     }
 }
 
-export default all([takeLatest('@order/ORDER_REQUEST', orderRequest)]);
+export function* orderCancel({payload}) {
+    try {
+        const {id} = payload;
+
+        const response = yield call(api.delete, `orders/${id}`);
+
+        yield put(orderCancelSuccess(response.data));
+
+        Alert.alert('Sucesso', 'Pedido cancelado com sucesso!');
+    } catch (err) {
+        Alert.alert(
+            'Error',
+            'Erro ao cancelar pedido, verifique se o seu pedido não ultrapassou 15 minutos!',
+        );
+
+        yield put(orderFailure());
+    }
+}
+
+export default all([
+    takeLatest('@order/ORDER_REQUEST', orderRequest),
+    takeLatest('@order/ORDER_CANCEL', orderCancel),
+]);

@@ -5,9 +5,23 @@ export function orderRequest(data) {
     };
 }
 
-export function orderSuccess(orders) {
+export function orderCancel(id) {
     return {
-        type: '@order/ORDER_SUCCESS',
+        type: '@order/ORDER_CANCEL',
+        payload: {id},
+    };
+}
+
+export function orderCancelSuccess(order) {
+    return {
+        type: '@order/ORDER_CANCEL_SUCCESS',
+        payload: {order},
+    };
+}
+
+export function orderRequestSuccess(orders) {
+    return {
+        type: '@order/ORDER_REQUEST_SUCCESS',
         payload: {orders},
     };
 }

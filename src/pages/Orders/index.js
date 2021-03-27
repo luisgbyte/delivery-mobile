@@ -2,7 +2,7 @@ import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {useFocusEffect} from '@react-navigation/native';
 
-import {Alert, View, Text, ActivityIndicator} from 'react-native';
+import {View, Text, ActivityIndicator, Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
@@ -23,7 +23,7 @@ import {
 
 import {NoOrders} from '~/components/Svg';
 
-import {orderRequest} from '~/store/modules/order/actions';
+import {orderRequest, orderCancel} from '~/store/modules/order/actions';
 
 const Orders = () => {
     const dispatch = useDispatch();
@@ -35,6 +35,20 @@ const Orders = () => {
     );
 
     const {loading, orders} = useSelector((state) => state.order);
+
+    const cancelOrderAlert = (id) =>
+        Alert.alert(
+            'Cancelar',
+            'Deseja cancelar pedido? (Atenção: pedidos com mais de 15 minutos não podem ser cancelados);',
+            [
+                {
+                    text: 'Cancel',
+                    onPress: () => {},
+                    style: 'cancel',
+                },
+                {text: 'OK', onPress: () => dispatch(orderCancel(id))},
+            ],
+        );
 
     return (
         <Container>
@@ -54,7 +68,7 @@ const Orders = () => {
                                         size={26}
                                         color="#606c38"
                                         onPress={() =>
-                                            Alert.alert('Cancelar pedido?')
+                                            cancelOrderAlert(order.id)
                                         }
                                     />
                                 </RemoveOrder>
