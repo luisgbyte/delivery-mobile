@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {useFocusEffect} from '@react-navigation/native';
 
@@ -33,6 +33,13 @@ const Orders = () => {
             dispatch(orderRequest());
         }, []),
     );
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            dispatch(orderRequest());
+        }, 20000);
+        return () => clearInterval(interval);
+    }, []);
 
     const {loading, orders} = useSelector((state) => state.order);
 

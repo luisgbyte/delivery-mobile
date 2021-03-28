@@ -42,7 +42,7 @@ const Home = ({navigation}) => {
 
         const interval = setInterval(() => {
             dispatch(productRequest());
-        }, 50000);
+        }, 30000);
 
         return () => clearInterval(interval);
     }, []);
