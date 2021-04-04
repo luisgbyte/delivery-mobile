@@ -11,6 +11,11 @@ export function* signIn({payload}) {
         const response = yield call(api.post, 'sessions', data);
 
         const {token, user} = response.data;
+
+        if (user.whoami !== 'client') {
+            throw new Error('oops, you are not client');
+        }
+
         yield put(signInSuccess(token, user));
 
         api.defaults.headers.Authorization = `Bearer ${token}`;
