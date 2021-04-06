@@ -1,6 +1,6 @@
 import {takeLatest, call, put, all} from 'redux-saga/effects';
 
-import {Alert} from 'react-native';
+// import {Alert} from 'react-native';
 
 import api from '~/services/api';
 
@@ -13,7 +13,7 @@ export function* requestProducts() {
         yield put(productSuccess(response.data));
     } catch (err) {
         yield put(productFailure());
-        Alert.alert('Erro ao carregar dados!');
+        // Alert.alert('Erro ao carregar dados!');
     }
 }
 

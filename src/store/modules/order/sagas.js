@@ -11,8 +11,7 @@ export function* orderRequest() {
 
         yield put(orderRequestSuccess(response.data));
     } catch (err) {
-        Alert.alert('Error', 'Erro carregar pedidos!');
-
+        // Alert.alert('Error', 'Erro carregar pedidos!');
         yield put(orderFailure());
     }
 }
@@ -28,8 +27,8 @@ export function* orderCancel({payload}) {
         Alert.alert('Sucesso', 'Pedido cancelado com sucesso!');
     } catch (err) {
         Alert.alert(
-            'Error',
-            'Erro ao cancelar pedido, verifique se o seu pedido não ultrapassou 15 minutos!',
+            'Error ao cancelar pedido',
+            `1) Verifique se o limite de cancelamento já não foi alcançado.\n\n2) Verifique se o pedido já não foi cancelado.\n\n3)Talvez estejamos lidando com um problema de conexão, por favor, tente novamente.`,
         );
 
         yield put(orderFailure());

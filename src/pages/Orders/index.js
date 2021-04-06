@@ -48,7 +48,7 @@ const Orders = () => {
     const cancelOrderAlert = (id) =>
         Alert.alert(
             'Cancelar',
-            'Deseja cancelar pedido? (Atenção: pedidos com mais de 15 minutos não podem ser cancelados);',
+            `Deseja cancelar pedido?\n\nAtenção: pedidos com mais de 10 minutos não podem ser cancelados pelo sistema.`,
             [
                 {
                     text: 'Cancel',
@@ -100,7 +100,6 @@ const Orders = () => {
                                 </CardBody>
                                 <CardFooter>
                                     <Text style={{fontSize: 15}}>
-                                        Total:{' '}
                                         <OrderTotal>
                                             {formatValue(order.total)}
                                         </OrderTotal>
@@ -118,7 +117,7 @@ const Orders = () => {
                             <NoOrders height="190px" width="300px" />
                             <TitleEmpty>
                                 Nenhum pedido encontrado, adicione produtos ao
-                                carrinho e faça sua compra :)
+                                carrinho e realize sua compra :)
                             </TitleEmpty>
                         </View>
                     )}
