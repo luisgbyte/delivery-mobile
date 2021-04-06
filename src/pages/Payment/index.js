@@ -18,8 +18,8 @@ import {
 } from './styles';
 
 const radio_props = [
-    {label: 'Cartão de Crédito (Entregador)', value: 'cartao_credito'},
-    {label: 'Cartão de Débito (Entregador)', value: 'cartao_debito'},
+    {label: 'Cartão de Crédito (Entregador)', value: 'cartão de crédito'},
+    {label: 'Cartão de Débito (Entregador)', value: 'cartão de débito'},
     {label: 'Dinheiro', value: 'dinheiro'},
 ];
 
