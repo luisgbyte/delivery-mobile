@@ -5,6 +5,8 @@ import {useFocusEffect} from '@react-navigation/native';
 import {View, Text, ActivityIndicator, Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import formatValue from '~/utils/formatValue';
+
 import {
     Container,
     Header,
@@ -97,10 +99,10 @@ const Orders = () => {
                                         ))}
                                 </CardBody>
                                 <CardFooter>
-                                    <Text style={{fontSize: 18}}>
+                                    <Text style={{fontSize: 15}}>
                                         Total:{' '}
                                         <OrderTotal>
-                                            R$ {order.total}
+                                            {formatValue(order.total)}
                                         </OrderTotal>
                                     </Text>
                                 </CardFooter>
