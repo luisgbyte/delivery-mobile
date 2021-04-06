@@ -116,7 +116,9 @@ const Home = ({navigation}) => {
                                                     height: 88,
                                                     borderRadius: 50,
                                                 }}
-                                                source={{uri: product.file.url}}
+                                                source={{
+                                                    uri: product.file?.url,
+                                                }}
                                             />
                                         </FoodImageContainer>
                                         <FoodContent>

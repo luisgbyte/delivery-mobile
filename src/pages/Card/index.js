@@ -85,7 +85,7 @@ const Card = () => {
                                         height: 88,
                                         borderRadius: 50,
                                     }}
-                                    source={{uri: item.file.url}}
+                                    source={{uri: item.file?.url}}
                                 />
                             </FoodImageContainer>
                             <FoodContent>

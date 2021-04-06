@@ -1,8 +1,8 @@
 import {Alert} from 'react-native';
-import {takeLatest, call, put, all} from 'redux-saga/effects';
+import {takeLatest, call, put, all, delay} from 'redux-saga/effects';
 
 import api from '~/services/api';
-
+import * as RootNavigation from '~/RootNavigation';
 import {signInSuccess, signUpSuccess, signFailure} from './actions';
 
 export function* signIn({payload}) {
@@ -39,6 +39,8 @@ export function* signUp({payload}) {
         yield put(signUpSuccess());
         // history.push('/dashboard');
         Alert.alert('Sucesso', 'Seu cadastro foi realizado com sucesso!');
+        yield delay(500);
+        yield RootNavigation.navigate('SignIn');
     } catch (err) {
         Alert.alert(
             'Falha no Cadastro',

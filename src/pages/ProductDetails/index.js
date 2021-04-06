@@ -86,7 +86,7 @@ const ProductDetails = () => {
                                 }}
                                 resizeMode="cover"
                                 source={{
-                                    uri: product.file.url,
+                                    uri: product.file?.url,
                                 }}
                             />
                         </FoodImageContainer>
