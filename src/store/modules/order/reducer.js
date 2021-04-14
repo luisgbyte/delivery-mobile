@@ -32,7 +32,7 @@ export default function user(state = INITIAL_STATE, action) {
                     (order) => order.id === id,
                 );
 
-                draft.orders.splice(index, 1);
+                draft.orders[index].status = 'Cancelado';
                 draft.loading = false;
             });
 

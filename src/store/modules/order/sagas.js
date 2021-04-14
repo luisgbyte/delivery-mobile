@@ -26,10 +26,9 @@ export function* orderCancel({payload}) {
 
         Alert.alert('Sucesso', 'Pedido cancelado com sucesso!');
     } catch (err) {
-        Alert.alert(
-            'Error ao cancelar pedido',
-            `1) Verifique se o limite de cancelamento já não foi alcançado.\n\n2) Verifique se o pedido já não foi cancelado.\n\n3)Talvez estejamos lidando com um problema de conexão, por favor, tente novamente.`,
-        );
+        const {error} = err.response.data;
+
+        Alert.alert(error);
 
         yield put(orderFailure());
     }
