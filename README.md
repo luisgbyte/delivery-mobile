@@ -7,11 +7,11 @@
 </div>
 
 ## About the project
-
+This is a mobile part of the delivery project, with the goal that customers will be able to place their orders through the application.
 
 #### Complementary part of the project:
 - [Backend](https://github.com/luisgbyte/delivery-backend)
-- [Frontend](https://github.com/luisgbyte/delivery-mobile)
+- [Frontend](https://github.com/luisgbyte/delivery-web)
 
 ## :eyes: Preview App
 
