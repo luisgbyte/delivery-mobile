@@ -15,7 +15,7 @@ This is a mobile part of the delivery project, with the goal that customers will
 
 ## :eyes: Preview App
 
-![Alt Text]()
+![Alt Text](https://github.com/luisgbyte/delivery-mobile/blob/master/app.gif)
 
 ## :heavy_check_mark: Features
 :white_check_mark: Login <br/>
